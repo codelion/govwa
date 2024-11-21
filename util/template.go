@@ -15,8 +15,8 @@ func SafeRender(w http.ResponseWriter, r *http.Request, name string, data map[st
 	sid := s.GetSession(r, "id")//make uid available to all page
 	data["uid"] = sid
 
-	template := template.Must(template.ParseGlob("templates/*"))
-	err := template.ExecuteTemplate(w, name, data)
+	tmpl := template.Must(template.ParseGlob("templates/*"))
+	err := tmpl.ExecuteTemplate(w, name, data)
 	if err != nil{
 		log.Println(err.Error())
 	}
@@ -35,12 +35,5 @@ func RenderAsJson(w http.ResponseWriter, data ...interface{}) {
 	w.Write(b)
 }
 
-func UnSafeRender(w http.ResponseWriter, name string, data ...interface{}) {
-
-	template := template.Must(template.ParseGlob("templates/*"))
-	template.ExecuteTemplate(w, name, data)
-}
-
-func ToHTML(text string)template.HTML{
-	return template.HTML(text)
-}
+// Note: Removed UnSafeRender and ToHTML functions because using direct HTML without encoding is risky.
+// Instead, use SafeRender with properly sanitized input data.

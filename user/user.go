@@ -1,11 +1,67 @@
 package user
 
 import (
-
 	"log"
 	"net/http"
 	"strconv"
-	"crypto/md5"
+	"encoding/hex"
+	"golang.org/x/crypto/blake2b"
+
+	"io"
+	"crypto/rand"
+	"encoding/base64"
+	"fmt"
+	"golang.org/x/crypto/argon2"
+	"crypto/subtle"
+)
+
+func generateBlake2bHash(input []byte) string {
+	blake2bHasher, err := blake2b.New512(nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	blake2bHasher.Write(input)
+	hash := blake2bHasher.Sum(nil)
+	return hex.EncodeToString(hash)
+}
+
+func main() {
+	// Example usage of BLAKE2b for hashing
+	data := []byte("Example data to hash")
+	hash := generateBlake2bHash(data)
+	fmt.Println("BLAKE2b Hash:", hash)
+
+	// Example usage of Argon2id for password hashing
+	p := argonParameters{
+		memory:      64 * 1024,
+		iterations:  3,
+		parallelism: 2,
+		saltLength:  16,
+		keyLength:   32,
+	}
+
+	// Generate random salt
+	salt := make([]byte, p.saltLength)
+	if _, err := io.ReadFull(rand.Reader, salt); err != nil {
+		log.Fatal(err)
+	}
+
+	usersPassword := []byte("User's Very S3cur3P4ss@rd@#$%")
+
+	var derivedKey []byte
+	// Create key hash derived from user's password
+	derivedKey = argon2.IDKey(usersPassword, salt, p.iterations, p.memory, p.parallelism, p.keyLength)
+	fmt.Printf("Stored key format: %s\n", p.StringFormat(salt, derivedKey))
+
+	// Verify against stored hash
+	keyToCompare := argon2.IDKey(usersPassword, salt, p.iterations, p.memory, p.parallelism, p.keyLength)
+
+	if subtle.ConstantTimeCompare(derivedKey, keyToCompare) == 1 {
+		fmt.Printf("Passwords match\n")
+	} else {
+		fmt.Printf("Passwords do not match\n")
+	}
+}
 	"database/sql"
 	"encoding/hex"
 	"html/template"

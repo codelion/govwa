@@ -2,7 +2,6 @@ package database
 
 import (
 	"database/sql"
-	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/govwa/util/config"
 	"log"
@@ -21,7 +20,9 @@ func Connect() (*sql.DB, error) {
 	if err != nil {
 		return nil, err
 	}
-	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS " + config.Dbname)
+
+	// Use parameterized query to prevent SQL injection
+	_, err = db.Exec("CREATE DATABASE IF NOT EXISTS ?", config.Dbname)
 
 	if err != nil {
 		return nil, err
@@ -51,7 +52,7 @@ func CheckDatabase() (bool, error) {
 	}
 
 	const (
-		checksql = `SELECT 1  FROM Users limit 1` //this will check if Table dbname.Users exist otherways will redirect to setup page
+		checksql = `SELECT 1  FROM Users limit 1` // this will check if Table dbname.Users exist otherways will redirect to setup page
 	)
 	result, err := DB.Exec(checksql)
 
