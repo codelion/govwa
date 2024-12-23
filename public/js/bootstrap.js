@@ -8,6 +8,13 @@ if (typeof jQuery === 'undefined') {
   throw new Error('Bootstrap\'s JavaScript requires jQuery')
 }
 
+/**
+ * Checks jQuery version compatibility for Bootstrap's JavaScript
+ * This function verifies if the current jQuery version is compatible with Bootstrap's JavaScript requirements.
+ * It throws an error if the jQuery version is not within the supported range.
+ * @param {Object} $ - The jQuery object
+ * @throws {Error} Throws an error if jQuery version is not compatible
+ */
 +function ($) {
   'use strict';
   var version = $.fn.jquery.split(' ')[0].split('.')
@@ -25,6 +32,11 @@ if (typeof jQuery === 'undefined') {
  * ======================================================================== */
 
 
+/**
+ * Adds CSS transition support detection and emulation to jQuery
+ * @param {Object} $ - jQuery object
+ * @returns {undefined} This function doesn't return a value
+ */
 +function ($) {
   'use strict';
 
@@ -85,6 +97,11 @@ if (typeof jQuery === 'undefined') {
  * ======================================================================== */
 
 
+/**
+ * Initializes and manages dismissible alert functionality
+ * @param {jQuery} $ - jQuery object
+ * @returns {void} This function doesn't return a value
+ */
 +function ($) {
   'use strict';
 
@@ -180,6 +197,11 @@ if (typeof jQuery === 'undefined') {
  * ======================================================================== */
 
 
+/**
+ * Initializes and manages Button functionality for Bootstrap elements
+ * @param {jQuery} $ - jQuery object
+ * @returns {void} This function does not return a value
+ */
 +function ($) {
   'use strict';
 
@@ -306,6 +328,11 @@ if (typeof jQuery === 'undefined') {
  * ======================================================================== */
 
 
+/**
+ * Creates a new Carousel instance or calls a method on an existing instance
+ * @param {string|object} option - If a string, the name of the method to call. If an object, initialization options for a new Carousel instance.
+ * @returns {jQuery} The jQuery object for chaining
+ */
 +function ($) {
   'use strict';
 
@@ -545,6 +572,14 @@ if (typeof jQuery === 'undefined') {
 
 /* jshint latedef: false */
 
+/**
+ * Creates a new Collapse instance for managing collapsible elements.
+ * @param {HTMLElement} element - The DOM element to be collapsed/expanded.
+ * @param {Object} [options] - Configuration options for the Collapse instance.
+ * @param {boolean} [options.toggle=true] - Whether to toggle the collapse state on initialization.
+ * @param {string|HTMLElement} [options.parent] - Selector or element for the parent container.
+ * @returns {Collapse} A new Collapse instance.
+ */
 +function ($) {
   'use strict';
 
@@ -757,6 +792,11 @@ if (typeof jQuery === 'undefined') {
  * ======================================================================== */
 
 
+/**
+ * Creates a dropdown functionality for Bootstrap components.
+ * @param {jQuery} $ - The jQuery object.
+ * @returns {void} This function doesn't return a value.
+ */
 +function ($) {
   'use strict';
 
@@ -923,6 +963,28 @@ if (typeof jQuery === 'undefined') {
  * ======================================================================== */
 
 
+/**
+ * Modal Plugin for Bootstrap
+ * This plugin creates and manages modal dialogs in a web application.
+ * It provides functionality for showing, hiding, and customizing modals,
+ * as well as handling modal events and transitions.
+ * 
+ * @param {Object} option - Configuration options for the modal
+ * @param {jQuery|HTMLElement} [_relatedTarget] - The element that triggered the modal
+ * @returns {jQuery} The jQuery object for chaining
+ * 
+ * @example
+ * // Basic usage
+ * $('#myModal').modal('show');
+ * 
+ * // With options
+ * $('#myModal').modal({
+ *   backdrop: 'static',
+ *   keyboard: false
+ * });
+ * 
+ * @throws {Error} If the modal element is not found
+ */
 +function ($) {
   'use strict';
 
@@ -1264,6 +1326,12 @@ if (typeof jQuery === 'undefined') {
  * ======================================================================== */
 
 
+/**
+ * Creates a new Tooltip instance
+ * @param {HTMLElement} element - The DOM element to attach the tooltip to
+ * @param {Object} options - Configuration options for the tooltip
+ * @returns {Tooltip} A new Tooltip instance
+ */
 +function ($) {
   'use strict';
 
@@ -1784,6 +1852,12 @@ if (typeof jQuery === 'undefined') {
  * ======================================================================== */
 
 
+/**
+ * Initializes and manages a Popover component for jQuery
+ * @param {Object} $ - jQuery object
+ * @returns {Function} Plugin function to be used as a jQuery plugin
+ * @throws {Error} If tooltip.js is not available
+ */
 +function ($) {
   'use strict';
 
@@ -1893,6 +1967,14 @@ if (typeof jQuery === 'undefined') {
  * ======================================================================== */
 
 
+/**
+ * ScrollSpy constructor function. Initializes a new ScrollSpy instance.
+ * @param {HTMLElement|jQuery} element - The element to apply ScrollSpy to, typically the window or a scrollable container.
+ * @param {Object} [options] - Configuration options for ScrollSpy.
+ * @param {number} [options.offset=10] - The offset to use when calculating scroll position.
+ * @param {string} [options.target=''] - The target selector for finding nav items.
+ * @returns {ScrollSpy} A new ScrollSpy instance.
+ */
 +function ($) {
   'use strict';
 
@@ -2066,6 +2148,11 @@ if (typeof jQuery === 'undefined') {
  * ======================================================================== */
 
 
+/**
+ * Creates and manages a tab component for Bootstrap.
+ * @param {jQuery} element - The jQuery object representing the tab element.
+ * @returns {Tab} A new Tab instance.
+ */
 +function ($) {
   'use strict';
 
@@ -2222,6 +2309,11 @@ if (typeof jQuery === 'undefined') {
  * ======================================================================== */
 
 
+/**
+ * Defines and initializes the Affix plugin for Bootstrap
+ * @param {jQuery} $ - The jQuery object
+ * @returns {void} This function doesn't return a value
+ */
 +function ($) {
   'use strict';
 
